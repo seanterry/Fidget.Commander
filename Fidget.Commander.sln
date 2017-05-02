@@ -5,17 +5,15 @@ VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shared", "_Shared", "{17235142-7967-442A-B635-B0273BC83572}"
 	ProjectSection(SolutionItems) = preProject
-		..\LICENSE = ..\LICENSE
-		..\README.md = ..\README.md
+		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commander", "Commander", "{7F060608-F4A1-4FAC-BB69-653CA83CD9D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fidget.Commander", "src\Fidget.Commander.csproj", "{17E6F7E1-6B97-4C48-BB74-0B97C4708680}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fidget.Commander", "Fidget.Commander\src\Fidget.Commander.csproj", "{17E6F7E1-6B97-4C48-BB74-0B97C4708680}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fidget.Commander.Abstractions", "ref\Fidget.Commander.Abstractions.csproj", "{8A047D50-9326-47AC-BAD2-033D0F97848D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fidget.Commander.Abstractions", "Fidget.Commander\ref\Fidget.Commander.Abstractions.csproj", "{8A047D50-9326-47AC-BAD2-033D0F97848D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fidget.Commander.Test", "Fidget.Commander\test\Fidget.Commander.Test.csproj", "{567982C5-3B2D-4CC9-B093-2AB754862D68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fidget.Commander.Test", "test\Fidget.Commander.Test.csproj", "{567982C5-3B2D-4CC9-B093-2AB754862D68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,10 +64,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{17E6F7E1-6B97-4C48-BB74-0B97C4708680} = {7F060608-F4A1-4FAC-BB69-653CA83CD9D8}
-		{8A047D50-9326-47AC-BAD2-033D0F97848D} = {7F060608-F4A1-4FAC-BB69-653CA83CD9D8}
-		{567982C5-3B2D-4CC9-B093-2AB754862D68} = {7F060608-F4A1-4FAC-BB69-653CA83CD9D8}
 	EndGlobalSection
 EndGlobal
