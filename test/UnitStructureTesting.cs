@@ -21,10 +21,6 @@ namespace Fidget.Commander
             
             IComparable Instance = new Unit();
 
-            /// <summary>
-            /// Reports as the same position as itself.
-            /// </summary>
-            
             [Fact]
             public void ReturnsZero_WhenComparedToSelf()
             {
@@ -32,10 +28,6 @@ namespace Fidget.Commander
                 Assert.Equal( 0, actual );
             }
             
-            /// <summary>
-            /// Reports as the same position when compared to the default instance.
-            /// </summary>
-
             [Fact]
             public void ReturnsZero_WhenComparedToDefault()
             {
@@ -56,20 +48,12 @@ namespace Fidget.Commander
 
             IComparable<Unit> Instance = new Unit();
 
-            /// <summary>
-            /// Reports as the same position as itself.
-            /// </summary>
-
             [Fact]
             public void ReturnsZero_WhenComparedToSelf()
             {
                 var actual = Instance.CompareTo( (Unit)Instance );
                 Assert.Equal( 0, actual );
             }
-
-            /// <summary>
-            /// Reports as the same position when compared to the default instance.
-            /// </summary>
 
             [Fact]
             public void ReturnsZero_WhenComparedToDefault()
@@ -91,10 +75,6 @@ namespace Fidget.Commander
 
             object Instance = new Unit();
             
-            /// <summary>
-            /// Reports as equal when compared to itself.
-            /// </summary>
-
             [Fact]
             public void ReturnsTrue_WhenComparedToSelf()
             {
@@ -102,20 +82,12 @@ namespace Fidget.Commander
                 Assert.True( actual );
             }
 
-            /// <summary>
-            /// Reports as equal when compared to the default instance.
-            /// </summary>
-
             [Fact]
             public void ReturnsTrue_WhenComparedToDefault()
             {
                 var actual = Instance.Equals( Unit.Default );
                 Assert.True( actual );
             }
-
-            /// <summary>
-            /// Reports as not equal when compared to an object of another type.
-            /// </summary>
 
             [Fact]
             public void ReturnsFalse_WhenComparedToOtherType()
@@ -137,20 +109,12 @@ namespace Fidget.Commander
             
             IEquatable<Unit> Instance = new Unit();
 
-            /// <summary>
-            /// Reports equal when compared to itself.
-            /// </summary>
-
             [Fact]
             public void ReturnsTrue_WhenComparedToSelf()
             {
                 var actual = Instance.Equals( (Unit)Instance );
                 Assert.True( actual );
             }
-
-            /// <summary>
-            /// Reports equal when compared to the default instance.
-            /// </summary>
 
             [Fact]
             public void ReturnsTrue_WhenComparedToDefault()
@@ -166,10 +130,6 @@ namespace Fidget.Commander
 
         public class GetHashCode_Override
         {
-            /// <summary>
-            /// Should always return zero.
-            /// </summary>
-
             [Fact]
             public void ReturnsZero()
             {
@@ -192,10 +152,6 @@ namespace Fidget.Commander
             
             Unit Instance = new Unit();
 
-            /// <summary>
-            /// Reports equal when compared to itself.
-            /// </summary>
-
             [Fact]
             public void ReturnsTrue_WhenComparedToSelf()
             {
@@ -206,10 +162,6 @@ namespace Fidget.Commander
                 // xunit should also recognize as equal
                 Assert.Equal( Instance, Instance );
             }
-
-            /// <summary>
-            /// When compared to the default instance, true should be returned.
-            /// </summary>
 
             [Fact]
             public void ReturnsTrue_WhenComparedToDefault()
@@ -231,10 +183,6 @@ namespace Fidget.Commander
 
             Unit Instance = new Unit();
 
-            /// <summary>
-            /// Reports as equal when compared to itself.
-            /// </summary>
-
             [Fact]
             public void ReturnsFalse_WhenComparedToSelf()
             {
@@ -242,10 +190,6 @@ namespace Fidget.Commander
                 Assert.False( Instance != Instance );
                 #pragma warning restore CS1718
             }
-
-            /// <summary>
-            /// Reports as equal when compared to the default instance.
-            /// </summary>
 
             [Fact]
             public void ReturnsFalse_WhenComparedToDefault()

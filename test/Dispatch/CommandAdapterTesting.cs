@@ -39,12 +39,8 @@ namespace Fidget.Commander.Dispatch
         
         public class Constructor : CommandAdapterTesting
         {
-            /// <summary>
-            /// Handler argument should be required.
-            /// </summary>
-            
             [Fact]
-            public void Requires_Handler()
+            public void Requires_handler()
             {
                 MockHandler = null;
                 Assert.Throws<ArgumentNullException>( "handler", () => CreateInstance() );
@@ -75,12 +71,8 @@ namespace Fidget.Commander.Dispatch
             
             Task<object> CallExecute() => CreateInstance().Execute( Command, CancellationToken );
 
-            /// <summary>
-            /// Command argument should be required.
-            /// </summary>
-            
             [Fact]
-            public async Task Requires_Command()
+            public async Task Requires_command()
             {
                 Command = null;
                 await Assert.ThrowsAsync<ArgumentNullException>( "command", CallExecute );
@@ -92,21 +84,13 @@ namespace Fidget.Commander.Dispatch
             
             class WrongCommand : ICommand<object> {}
 
-            /// <summary>
-            /// Command argument should be verified to be the expected concrete type.
-            /// </summary>
-            
             [Fact]
-            public async Task Verifies_CommandIsExpectedType()
+            public async Task Throws_WhenCommandIsNotExpectedType()
             {
                 Command = new WrongCommand();
                 await Assert.ThrowsAsync<ArgumentException>( "command", CallExecute );
             }
 
-            /// <summary>
-            /// Execution should be interrupted when cancelled prior to calling the handler.
-            /// </summary>
-            
             [Fact]
             public async Task Interrupts_WhenCancelled()
             {
@@ -114,12 +98,8 @@ namespace Fidget.Commander.Dispatch
                 await Assert.ThrowsAsync<OperationCanceledException>( CallExecute );
             }
 
-            /// <summary>
-            /// Return value should match the return value of the handler.
-            /// </summary>
-            
             [Fact]
-            public async Task Returns_HandlerResult()
+            public async Task Returns_HandlerExecuteResult()
             {
                 var expected = new object();
                 var command = (TestCommand)Command;

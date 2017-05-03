@@ -30,12 +30,8 @@ namespace Fidget.Commander.Dispatch
         
         public class Constructor : CommandAdapterFactoryTesting
         {
-            /// <summary>
-            /// Resolver argument should be required.
-            /// </summary>
-            
             [Fact]
-            public void Requires_Resolver()
+            public void Requires_resolver()
             {
                 MockResolver = null;
                 Assert.Throws<ArgumentNullException>( "resolver", () => CreateInstance() );
@@ -66,33 +62,21 @@ namespace Fidget.Commander.Dispatch
             
             ICommandAdapter<object> CallFor() => CreateInstance().For( Command );
 
-            /// <summary>
-            /// Command argument should be required.
-            /// </summary>
-            
             [Fact]
-            public void Requires_Command()
+            public void Requires_command()
             {
                 Command = null;
                 Assert.Throws<ArgumentNullException>( "command", () => CallFor() );
             }
 
-            /// <summary>
-            /// Should verify that an adapter was returned from the resolver.
-            /// </summary>
-            
             [Fact]
-            public void Verified_AdapterReturnedFromResolver()
+            public void Throws_WhenNoAdapterReturnedFromResolver()
             {
                 var adapterType = typeof( ICommandAdapter<TestCommand, object> );
                 Assert.Throws<InvalidOperationException>( () => CallFor() );
                 MockResolver.Verify( _ => _.GetService( adapterType ), Times.Once );
             }
 
-            /// <summary>
-            /// The for method should request an adapter of the command type from the resolver and return it.
-            /// </summary>
-            
             [Fact]
             public void Returns_AdapterFromResolver()
             {
