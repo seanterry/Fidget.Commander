@@ -1,10 +1,9 @@
 ﻿namespace Fidget.Commander.Dispatch
 {
     /// <summary>
-    /// Factory for generating command adapters.
+    /// Defines a factory for generating command adapters.
     /// </summary>
-    /// <remarks>This is an extensibility point for dependency injection.</remarks>
-
+    
     public interface ICommandAdapterFactory
     {
         /// <summary>
