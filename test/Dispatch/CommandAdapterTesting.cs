@@ -28,10 +28,16 @@ namespace Fidget.Commander.Dispatch
         protected Mock<ICommandHandler<TestCommand,object>> MockHandler = new Mock<ICommandHandler<TestCommand, object>>();
 
         /// <summary>
+        /// Decorators collection.
+        /// </summary>
+        
+        protected List<ICommandDecorator<TestCommand,object>> Decorators = new List<ICommandDecorator<TestCommand, object>>();
+
+        /// <summary>
         /// Creates and returns an instance using the configured arguments.
         /// </summary>
         
-        protected ICommandAdapter<object> CreateInstance() => new CommandAdapter<TestCommand,object>( MockHandler?.Object );
+        protected ICommandAdapter<object> CreateInstance() => new CommandAdapter<TestCommand,object>( MockHandler?.Object, Decorators );
         
         /// <summary>
         /// Tests of the constructor method.
@@ -44,6 +50,13 @@ namespace Fidget.Commander.Dispatch
             {
                 MockHandler = null;
                 Assert.Throws<ArgumentNullException>( "handler", () => CreateInstance() );
+            }
+
+            [Fact]
+            public void Requires_decorators()
+            {
+                Decorators = null;
+                Assert.Throws<ArgumentNullException>( "decorators", () => CreateInstance() );
             }
         }
 
@@ -98,8 +111,12 @@ namespace Fidget.Commander.Dispatch
                 await Assert.ThrowsAsync<OperationCanceledException>( CallExecute );
             }
 
+            /// <summary>
+            /// Tests with no decorators involved.
+            /// </summary>
+            
             [Fact]
-            public async Task Returns_HandlerExecuteResult()
+            public async Task Returns_HandlerExecuteResult_WhenNoDecorators()
             {
                 var expected = new object();
                 var command = (TestCommand)Command;
@@ -107,6 +124,44 @@ namespace Fidget.Commander.Dispatch
                 
                 var actual = await CallExecute();
                 Assert.Equal( expected, actual );
+
+                MockHandler.Verify( _=> _.Handle( command, CancellationToken ), Times.Once );
+            }
+
+            /// <summary>
+            /// Test with decorators involved.
+            /// </summary>
+            
+            [Fact]
+            public async Task Returns_DecoratorExecuteResult_WhenDecorators()
+            {
+                var expected = new object();
+                var command = (TestCommand)Command;
+                var sequence = new MockSequence();
+                var mockDecorators = new List<Mock<ICommandDecorator<TestCommand,object>>>();
+
+                for ( var i = 0; i < 3; i++ )
+                {
+                    var decorator = new Mock<ICommandDecorator<TestCommand,object>>();
+                    decorator
+                        .InSequence( sequence )
+                        .Setup( _=> _.Execute( command, CancellationToken, It.IsAny<CommandDelegate<TestCommand,object>>() ) )
+                        .Returns( ( TestCommand cmd, CancellationToken token, CommandDelegate<TestCommand,object> continuation ) => continuation( cmd, token ) )
+                        .Verifiable();
+
+                    mockDecorators.Add( decorator );
+                    Decorators.Add( decorator.Object );
+                }
+
+                MockHandler.InSequence( sequence ).Setup( _ => _.Handle( command, CancellationToken ) ).ReturnsAsync( expected );
+
+                var actual = await CallExecute();
+                Assert.Equal( expected, actual );
+
+                foreach ( var decorator in mockDecorators )
+                {
+                    decorator.Verify( _=> _.Execute( command, CancellationToken, It.IsAny<CommandDelegate<TestCommand, object>>() ), Times.Once );
+                }
 
                 MockHandler.Verify( _=> _.Handle( command, CancellationToken ), Times.Once );
             }

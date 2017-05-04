@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,13 +22,20 @@ namespace Fidget.Commander.Dispatch
         readonly ICommandHandler<TCommand,TResult> Handler;
 
         /// <summary>
+        /// Collection of decorators for modifying command execution.
+        /// </summary>
+        
+        readonly IEnumerable<ICommandDecorator<TCommand,TResult>> Decorators;
+
+        /// <summary>
         /// Constructs an adapter for a command handler.
         /// </summary>
         /// <param name="handler">Handler that executes the command.</param>
 
-        public CommandAdapter( ICommandHandler<TCommand,TResult> handler ) 
+        public CommandAdapter( ICommandHandler<TCommand,TResult> handler, IEnumerable<ICommandDecorator<TCommand,TResult>> decorators ) 
         {
             Handler = handler ?? throw new ArgumentNullException( nameof(handler) );
+            Decorators = decorators ?? throw new ArgumentNullException( nameof(decorators) );
         }
 
         /// <summary>
@@ -45,7 +53,16 @@ namespace Fidget.Commander.Dispatch
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                return await Handler.Handle( concrete, cancellationToken );
+                var handle = new CommandDelegate<TCommand, TResult>( Handler.Handle );
+
+                if ( Decorators.Any() )
+                {
+                    handle = Decorators
+                        .Reverse()
+                        .Aggregate( handle, ( continuation, decorator ) => ( cmd, token ) => decorator.Execute( cmd, token, continuation ) );
+                }
+                
+                return await handle.Invoke( concrete, cancellationToken );
             }
 
             throw new ArgumentException( $"Expected command of type {typeof(TCommand)}; Received {command.GetType()}", nameof(command) );
