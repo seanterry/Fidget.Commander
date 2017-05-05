@@ -14,7 +14,7 @@ Once you've added the `Fidget.Commander` package to your project, you'll want to
 To get started, you'll need to tell your favorite DI container how to find the implementations of those interfaces.
 
 ### StructureMap
-Here's a simple registration example using `StructureMap.AspNetCore`, which is available in the code samples:
+Here's a simple registration example using `StructureMap.AspNetCore`, which is available in the code samples.
 ```csharp
     public class Startup
     {
@@ -78,7 +78,10 @@ Here's a simple registration example using `StructureMap.AspNetCore`, which is a
     }
 ```
 
-And of course a controller, command, handler, and decorator example:
+`CommandAdapterFactory' uses the `IServiceProvider` interface that most of the common DI containers. For those that don't, a simple wrapper or a custom implementation of `ICommandAdapterFactory` can be used.
+
+### Usage
+Here's a simple controller, command, handler, and decorator example. It returns a hello or goodbye greeting based on HTTP method, and a decorator to add some attitude:
 ```csharp
     [Route( "" )]
     public class HelloController : ControllerBase
