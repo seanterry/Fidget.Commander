@@ -13,6 +13,14 @@
         <PackageProjectUrl>https://github.com/seanterry42/Fidget.Commander</PackageProjectUrl>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <DocumentationFile>bin\Debug\netstandard1.4\Fidget.Commander.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <DocumentationFile>bin\Release\netstandard1.4\Fidget.Commander.xml</DocumentationFile>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="System.ComponentModel" Version="4.3.0" />
     </ItemGroup>
