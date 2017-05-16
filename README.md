@@ -2,7 +2,7 @@
 
 This is a simple dispatcher for executing commands in a CQRS-ish manner. In Fidget, however, everything is a command. In my day job as both a database administrator and API developer, I've found that commands frequently end up needing to return a value, and queries frequently require auditing.
 
-Consequently, Fidged has a unified interface for defining a commands, handlers, and decorators.
+Consequently, Fidged has a unified interface for defining commands, handlers, and decorators.
 
 ## Basics
 Once you've added the `Fidget.Commander` package to your project, you'll want to familiarize yourself with the following interfaces:
@@ -78,7 +78,7 @@ Here's a simple registration example using `StructureMap.AspNetCore`, which is a
     }
 ```
 
-`CommandAdapterFactory' uses the `IServiceProvider` interface that most of the common DI containers. For those that don't, a simple wrapper or a custom implementation of `ICommandAdapterFactory` can be used.
+`CommandAdapterFactory` uses the `IServiceProvider` interface that most of the common DI containers. For those that don't, a simple wrapper or a custom implementation of `ICommandAdapterFactory` can be used.
 
 ### Usage
 Here's a simple controller, command, handler, and decorator example. It returns a hello or goodbye greeting based on HTTP method, and a decorator to add some attitude:
