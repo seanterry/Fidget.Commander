@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shared", "_Shared", "{17235142-7967-442A-B635-B0273BC83572}"
 	ProjectSection(SolutionItems) = preProject
@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shared", "_Shared", "{1723
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fidget.Commander", "src\Fidget.Commander.csproj", "{17E6F7E1-6B97-4C48-BB74-0B97C4708680}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fidget.Commander.Abstractions", "ref\Fidget.Commander.Abstractions.csproj", "{8A047D50-9326-47AC-BAD2-033D0F97848D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fidget.Commander.Test", "test\Fidget.Commander.Test.csproj", "{567982C5-3B2D-4CC9-B093-2AB754862D68}"
 EndProject
@@ -41,18 +39,6 @@ Global
 		{17E6F7E1-6B97-4C48-BB74-0B97C4708680}.Release|x64.Build.0 = Release|Any CPU
 		{17E6F7E1-6B97-4C48-BB74-0B97C4708680}.Release|x86.ActiveCfg = Release|Any CPU
 		{17E6F7E1-6B97-4C48-BB74-0B97C4708680}.Release|x86.Build.0 = Release|Any CPU
-		{8A047D50-9326-47AC-BAD2-033D0F97848D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A047D50-9326-47AC-BAD2-033D0F97848D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A047D50-9326-47AC-BAD2-033D0F97848D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{8A047D50-9326-47AC-BAD2-033D0F97848D}.Debug|x64.Build.0 = Debug|Any CPU
-		{8A047D50-9326-47AC-BAD2-033D0F97848D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{8A047D50-9326-47AC-BAD2-033D0F97848D}.Debug|x86.Build.0 = Debug|Any CPU
-		{8A047D50-9326-47AC-BAD2-033D0F97848D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A047D50-9326-47AC-BAD2-033D0F97848D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A047D50-9326-47AC-BAD2-033D0F97848D}.Release|x64.ActiveCfg = Release|Any CPU
-		{8A047D50-9326-47AC-BAD2-033D0F97848D}.Release|x64.Build.0 = Release|Any CPU
-		{8A047D50-9326-47AC-BAD2-033D0F97848D}.Release|x86.ActiveCfg = Release|Any CPU
-		{8A047D50-9326-47AC-BAD2-033D0F97848D}.Release|x86.Build.0 = Release|Any CPU
 		{567982C5-3B2D-4CC9-B093-2AB754862D68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{567982C5-3B2D-4CC9-B093-2AB754862D68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{567982C5-3B2D-4CC9-B093-2AB754862D68}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -83,5 +69,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A1D6A2DF-5511-4927-A00E-F22FCD2B9993} = {15A516B5-8932-4B8F-9145-1E29B2365E90}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AAF314A2-B872-43CB-807B-3CDE625EAC50}
 	EndGlobalSection
 EndGlobal

@@ -31,6 +31,7 @@ namespace Fidget.Commander.Dispatch
         /// Constructs an adapter for a command handler.
         /// </summary>
         /// <param name="handler">Handler that executes the command.</param>
+        /// <param name="decorators">Decorators for modifying command behavior.</param>
 
         public CommandAdapter( ICommandHandler<TCommand,TResult> handler, IEnumerable<ICommandDecorator<TCommand,TResult>> decorators ) 
         {
