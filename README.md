@@ -2,7 +2,7 @@
 
 This is a simple dispatcher for executing commands in a CQRS-ish manner. In Fidget, however, everything is a command. In my day job as both a database administrator and API developer, I've found that commands frequently end up needing to return a value, and queries frequently require auditing.
 
-Consequently, Fidged has a unified interface for defining commands, handlers, and decorators.
+Consequently, Fidget has a unified interface for defining commands, handlers, and decorators.
 
 ## Basics
 Once you've added the `Fidget.Commander` package to your project, you'll want to familiarize yourself with the following interfaces:
