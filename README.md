@@ -13,68 +13,46 @@ Once you've added the `Fidget.Commander` package to your project, you'll want to
 
 To get started, you'll need to tell your favorite DI container how to find the implementations of those interfaces.
 
-### StructureMap
-Here's a simple registration example using `StructureMap.AspNetCore`, which is available in the code samples.
+### Microsoft.Extensions.DependencyInjection + Scrutor
+Here's a simple registration example using the standard dependency injection container in ASP.NET Core. It is augmented using Scrutor to scan the assembly for handlers and decorators that we would otherwise have to register individually.
+
 ```csharp
-    public class Startup
+    public void ConfigureServices( IServiceCollection services )
     {
-        /// <summary>
-        /// Application entry point.
-        /// </summary>
-        /// <param name="args">Command line arguments.</param>
+        // register the commander
+        services.AddFidgetCommander()
+            // note: this example uses Scrutor for assembly scanning
+            .Scan( scanner => scanner.FromAssemblyOf<Startup>()
+                .AddClasses( _ => _.AssignableTo( typeof( ICommandHandler<,> ) ) )
+                    .AsImplementedInterfaces()
+                    .WithTransientLifetime()
+                .AddClasses( _ => _.AssignableTo( typeof( ICommandDecorator<,> ) ) )
+                    .AsImplementedInterfaces()
+                    .WithTransientLifetime()
+            );
+                
+        services.AddMvc();
+    }
+```
 
-        public static void Main( string[] args )
+### StructureMap.AspNetCore
+Here's a registration example using StructureMap.AspNetCore:
+```csharp
+    public void ConfigureServices( IServiceCollection services )
+    {
+        services.AddFidgetCommander();
+        services.AddMvc();
+    }
+
+    public void ConfigureContainer( Registry registry )
+    {
+        // add all your handlers and decorators
+        registry.Scan( scanner =>
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .UseStructureMap()
-                .Build();
-
-            host.Run();
-        }
-
-        /// <summary>
-        /// Configures application services.
-        /// </summary>
-        /// <param name="services">Services collection.</param>
-        
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();
-        }
-
-        /// <summary>
-        /// Configures application dependency injection.
-        /// </summary>
-        /// <param name="registry">StructureMap registry.</param>
-
-        public void ConfigureContainer( Registry registry )
-        {
-            // add all your handlers and decorators
-            registry.Scan( scanner =>
-            {
-                scanner.TheCallingAssembly();
-                scanner.ConnectImplementationsToTypesClosing( typeof( ICommandHandler<,> ) );
-                scanner.ConnectImplementationsToTypesClosing( typeof( ICommandDecorator<,> ) );
-            });
-            
-            // add the types that Fidget needs
-            registry.For( typeof(ICommandAdapter<,>) ).Use( typeof(CommandAdapter<,>) );
-            registry.For<ICommandAdapterFactory>().Use<CommandAdapterFactory>();
-            registry.For<ICommandDispatcher>().Use<CommandDispatcher>();
-        }
-
-        /// <summary>
-        /// Configures the HTTP pipeline.
-        /// </summary>
-
-        public void Configure( IApplicationBuilder app )
-        {
-            app.UseDeveloperExceptionPage();
-            app.UseMvc();
-        }
+            scanner.AssemblyContainingType<Startup>();
+            scanner.ConnectImplementationsToTypesClosing( typeof( ICommandHandler<,> ) );
+            scanner.ConnectImplementationsToTypesClosing( typeof( ICommandDecorator<,> ) );
+        });
     }
 ```
 
