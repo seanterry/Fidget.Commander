@@ -56,7 +56,7 @@ Here's a registration example using StructureMap.AspNetCore:
     }
 ```
 
-`CommandAdapterFactory` uses the `IServiceProvider` interface that most of the common DI containers. For those that don't, a simple wrapper or a custom implementation of `ICommandAdapterFactory` can be used.
+`CommandAdapterFactory` uses the `IServiceProvider` interface that most of the common DI containers support. For those that don't, a simple wrapper or a custom implementation of `ICommandAdapterFactory` can be used.
 
 ### Usage
 Here's a simple controller, command, handler, and decorator example. It returns a hello or goodbye greeting based on HTTP method, and a decorator to add some attitude:
