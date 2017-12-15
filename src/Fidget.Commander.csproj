@@ -12,14 +12,7 @@
         <PackageLicenseUrl>https://github.com/seanterry42/Fidget.Commander/blob/master/LICENSE</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/seanterry42/Fidget.Commander</PackageProjectUrl>
         <RootNamespace>Fidget.Commander</RootNamespace>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <DocumentationFile>bin\Debug\netstandard2.0\Fidget.Commander.xml</DocumentationFile>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-      <DocumentationFile>bin\Release\netstandard2.0\Fidget.Commander.xml</DocumentationFile>
+        <NoWarn>1701;1702;1705;1998</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
@@ -30,10 +23,6 @@
       <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
         <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.dependencyinjection.abstractions\2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
       </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Internal\" />
     </ItemGroup>
 
 </Project>
