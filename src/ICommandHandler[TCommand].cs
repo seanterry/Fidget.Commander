@@ -13,12 +13,24 @@
     limitations under the License. 
 */
 
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace Fidget.Commander
 {
     /// <summary>
-    /// Defines a command whose execution returns no result.
+    /// Defines a handler for executing a command that returns no result.
     /// </summary>
-    /// <remarks>This is a marker interface.</remarks>
-    
-    public interface ICommand {}
+    /// <typeparam name="TCommand">Type of the command.</typeparam>
+
+    public interface ICommandHandler<in TCommand> where TCommand : ICommand 
+    {
+        /// <summary>
+        /// Handles execution of the command.
+        /// </summary>
+        /// <param name="command">Command to be executed.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        
+        Task Handle( TCommand command, CancellationToken cancellationToken );
+    }
 }

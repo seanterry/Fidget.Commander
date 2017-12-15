@@ -11,6 +11,7 @@
         <Copyright>Copyright 2017 Sean Terry</Copyright>
         <PackageLicenseUrl>https://github.com/seanterry42/Fidget.Commander/blob/master/LICENSE</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/seanterry42/Fidget.Commander</PackageProjectUrl>
+        <RootNamespace>Fidget.Commander</RootNamespace>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -29,6 +30,10 @@
       <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
         <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.dependencyinjection.abstractions\2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
       </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Internal\" />
     </ItemGroup>
 
 </Project>

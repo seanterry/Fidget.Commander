@@ -19,19 +19,20 @@ using System.Threading.Tasks;
 namespace Fidget.Commander
 {
     /// <summary>
-    /// Defines a dispatcher for resolving and executing the handlers for commands.
+    /// Defines a decorator for modifying the behavior of a command handler.
     /// </summary>
-
-    public interface ICommandDispatcher
+    /// <typeparam name="TCommand">Type of the command whose handler to decorate.</typeparam>
+    
+    public interface ICommandDecorator<TCommand> where TCommand : ICommand
     {
         /// <summary>
-        /// Locates and executes the handler for the given command.
+        /// Executes the decorator.
         /// </summary>
-        /// <typeparam name="TResult">Type of the command result.</typeparam>
-        /// <param name="command">Command whose handler to execute.</param>
+        /// <param name="command">Command to execute.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
+        /// <param name="continuation">Delegate that represents the next stage of command execution.</param>
         /// <returns>The command result.</returns>
-        
-        Task<TResult> Execute<TResult>( ICommand<TResult> command, CancellationToken cancellationToken = default(CancellationToken) );
+
+        Task Execute( TCommand command, CancellationToken cancellationToken, CommandDelegate<TCommand> continuation );
     }
 }

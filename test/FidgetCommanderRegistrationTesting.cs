@@ -23,9 +23,9 @@ namespace Fidget.Commander
             Assert.Throws<ArgumentNullException>( nameof(services), ()=> invoke() );
         }
 
-        public class TestCommand : ICommand {}
+        public class TestCommand : ICommand<Unit> {}
 
-        public class TestHandler : ICommandHandler<TestCommand>
+        public class TestHandler : ICommandHandler<TestCommand,Unit>
         {
             public Task<Unit> Handle( TestCommand command, CancellationToken cancellationToken ) => Task.FromResult( Unit.Default );
         }
