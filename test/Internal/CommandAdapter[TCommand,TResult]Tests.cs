@@ -97,7 +97,7 @@ namespace Fidget.Commander.Internal
             [InlineData( 0 )]
             [InlineData( 1 )]
             [InlineData( 3 )]
-            public async Task calls_handler_and_decorators( int expectedDecorators )
+            public async Task calls_handler_and_decorators_returns_result( int expectedDecorators )
             {
                 var actualDecorators = 0;
 
