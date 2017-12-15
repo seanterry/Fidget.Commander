@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <VersionPrefix>2.1.0</VersionPrefix>
+        <VersionPrefix>3.0.0-beta1</VersionPrefix>
         <PackageId>Fidget.Commander</PackageId>
         <Authors>Sean Terry</Authors>
         <Description>Basic command dispatcher</Description>
@@ -14,10 +14,6 @@
         <RootNamespace>Fidget.Commander</RootNamespace>
         <NoWarn>1701;1702;1705;1998</NoWarn>
     </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="System.ComponentModel" Version="4.3.0" />
-    </ItemGroup>
 
     <ItemGroup>
       <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">

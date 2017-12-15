@@ -11,6 +11,8 @@ Once you've added the `Fidget.Commander` package to your project, you'll want to
 - `ICommandDecorator<TCommand,TResult>` allows you to modify a handler's behavior without modifying the handler itself.
 - `ICommandDispatcher` is implemented for you, and true to its name, it dispatches commands to be executed by their handlers.
 
+As of version 3, commands that return no result do not need a TResult argument.
+
 To get started, you'll need to tell your favorite DI container how to find the implementations of those interfaces.
 
 ### Microsoft.Extensions.DependencyInjection + Scrutor
@@ -26,7 +28,13 @@ Here's a simple registration example using the standard dependency injection con
                 .AddClasses( _ => _.AssignableTo( typeof( ICommandHandler<,> ) ) )
                     .AsImplementedInterfaces()
                     .WithTransientLifetime()
+                .AddClasses( _ => _.AssignableTo( typeof( ICommandHandler<> ) ) )
+                    .AsImplementedInterfaces()
+                    .WithTransientLifetime()
                 .AddClasses( _ => _.AssignableTo( typeof( ICommandDecorator<,> ) ) )
+                    .AsImplementedInterfaces()
+                    .WithTransientLifetime()
+                .AddClasses( _ => _.AssignableTo( typeof( ICommandDecorator<> ) ) )
                     .AsImplementedInterfaces()
                     .WithTransientLifetime()
             );
@@ -51,7 +59,9 @@ Here's a registration example using StructureMap.AspNetCore:
         {
             scanner.AssemblyContainingType<Startup>();
             scanner.ConnectImplementationsToTypesClosing( typeof( ICommandHandler<,> ) );
+            scanner.ConnectImplementationsToTypesClosing( typeof( ICommandHandler<> ) );
             scanner.ConnectImplementationsToTypesClosing( typeof( ICommandDecorator<,> ) );
+            scanner.ConnectImplementationsToTypesClosing( typeof( ICommandDecorator<> ) );
         });
     }
 ```
