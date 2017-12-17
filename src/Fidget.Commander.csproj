@@ -12,6 +12,7 @@
         <PackageLicenseUrl>https://github.com/seanterry42/Fidget.Commander/blob/master/LICENSE</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/seanterry42/Fidget.Commander</PackageProjectUrl>
         <RootNamespace>Fidget.Commander</RootNamespace>
+        <DocumentationFile>bin\$(Configuration)\netstandard2.0\Fidget.Commander.xml</DocumentationFile>
         <NoWarn>1701;1702;1705;1998</NoWarn>
     </PropertyGroup>
 

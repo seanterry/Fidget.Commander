@@ -23,8 +23,7 @@ namespace Fidget.Commander
     /// Convenience type for implementing a command decorator that returns no result.
     /// </summary>
     /// <typeparam name="TCommand">Type of the command to decorate.</typeparam>
-    /// <typeparam name="TResult">Type of the command result.</typeparam>
-
+    
     public abstract class CommandDecorator<TCommand> : ICommandDecorator<TCommand> where TCommand : ICommand
     {
         /// <summary>

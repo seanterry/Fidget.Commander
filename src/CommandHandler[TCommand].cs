@@ -23,8 +23,7 @@ namespace Fidget.Commander
     /// Convenience type for implementing a command handler that returns no result.
     /// </summary>
     /// <typeparam name="TCommand">Type of the command to execute.</typeparam>
-    /// <typeparam name="TResult">Type of the command result.</typeparam>
-
+    
     public abstract class CommandHandler<TCommand> : ICommandHandler<TCommand> where TCommand : ICommand
     {
         /// <summary>
