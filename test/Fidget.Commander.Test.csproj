@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.0</TargetFramework>
         <RootNamespace>Fidget.Commander</RootNamespace>
+        <NoWarn>1701;1702;1705;1998</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>

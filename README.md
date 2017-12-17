@@ -11,6 +11,13 @@ Once you've added the `Fidget.Commander` package to your project, you'll want to
 - `ICommandDecorator<TCommand,TResult>` allows you to modify a handler's behavior without modifying the handler itself.
 - `ICommandDispatcher` is implemented for you, and true to its name, it dispatches commands to be executed by their handlers.
 
+Each of the generic types above have a variant without the `TResult` argument for commands that return no result. These commands will return the `Unit` structure.
+
+As of version 3, there are abstract types to reduce the amount of typing required to implement command handlers and command decorators. `CommandHandler` and `CommandDecorator` types both:
+- Perform argument null checking.
+- Check the cancellation token.
+- Eliminate the need to return `Unit.Default` on commands that return no result.
+
 To get started, you'll need to tell your favorite DI container how to find the implementations of those interfaces.
 
 ### Microsoft.Extensions.DependencyInjection + Scrutor

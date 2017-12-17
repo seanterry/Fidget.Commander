@@ -16,9 +16,9 @@
 namespace Fidget.Commander
 {
     /// <summary>
-    /// Defines a command whose execution returns no result.
+    /// Defines a handler for executing a command that returns no result.
     /// </summary>
-    /// <remarks>This is a marker interface.</remarks>
-    
-    public interface ICommand : ICommand<Unit> {}
+    /// <typeparam name="TCommand">Type of the command.</typeparam>
+
+    public interface ICommandHandler<in TCommand> : ICommandHandler<TCommand,Unit> where TCommand : ICommand {}
 }

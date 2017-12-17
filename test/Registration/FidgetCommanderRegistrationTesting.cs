@@ -1,4 +1,19 @@
-﻿using Fidget.Commander.Dispatch;
+﻿/*  Copyright 2017 Sean Terry
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License. 
+*/
+
+using Fidget.Commander.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading;
@@ -23,13 +38,21 @@ namespace Fidget.Commander
             Assert.Throws<ArgumentNullException>( nameof(services), ()=> invoke() );
         }
 
-        public class TestCommand : ICommand {}
+        public class TestVoidCommand : ICommand {}
 
-        public class TestHandler : ICommandHandler<TestCommand>
+        public class TestVoidHandler : ICommandHandler<TestVoidCommand>
         {
-            public Task<Unit> Handle( TestCommand command, CancellationToken cancellationToken ) => Task.FromResult( Unit.Default );
+            public Task<Unit> Handle( TestVoidCommand command, CancellationToken cancellationToken ) => Task.FromResult( Unit.Default );
         }
 
+        public class TestResultCommand : ICommand<object> {}
+
+        public class TestResultHandler : ICommandHandler<TestResultCommand,object>
+        {
+            public object Result { get; set; }
+            public Task<object> Handle( TestResultCommand command, CancellationToken cancellationToken ) => Task.FromResult( Result );
+        }
+        
         [Fact]
         public void registers_dispatcher()
         {
@@ -49,28 +72,28 @@ namespace Fidget.Commander
 
             Assert.IsType<CommandAdapterFactory>( actual );
         }
-
+        
         [Fact]
         public void registers_adapter()
         {
             // add handlers from assembly
-            var services = invoke().Scan( scanner => scanner.FromAssemblyOf<TestCommand>()
+            var services = invoke().Scan( scanner => scanner.FromAssemblyOf<TestResultCommand>()
                 .AddClasses( _ => _.AssignableTo( typeof( ICommandHandler<,> ) ) )
                     .AsImplementedInterfaces()
                     .WithTransientLifetime()
                 .AddClasses( _ => _.AssignableTo( typeof( ICommandDecorator<,> ) ) )
                     .AsImplementedInterfaces()
-                    .WithTransientLifetime() 
+                    .WithTransientLifetime()
             );
 
             var factory = services
                 .BuildServiceProvider()
                 .GetRequiredService<ICommandAdapterFactory>();
 
-            var command = new TestCommand();
-            var actual = factory.For( command );
+            var command = new TestResultCommand();
+            var actual = factory.CreateFor( command );
 
-            Assert.IsType<CommandAdapter<TestCommand,Unit>>( actual );
+            Assert.IsType<CommandAdapter<TestResultCommand,object>>( actual );
         }
     }
 }

@@ -16,9 +16,9 @@
 namespace Fidget.Commander
 {
     /// <summary>
-    /// Defines a command whose execution returns no result.
+    /// Defines a decorator for modifying the behavior of a command handler.
     /// </summary>
-    /// <remarks>This is a marker interface.</remarks>
-    
-    public interface ICommand : ICommand<Unit> {}
+    /// <typeparam name="TCommand">Type of the command whose handler to decorate.</typeparam>
+
+    public interface ICommandDecorator<TCommand> : ICommandDecorator<TCommand,Unit> where TCommand : ICommand {}
 }

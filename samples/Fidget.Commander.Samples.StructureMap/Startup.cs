@@ -1,5 +1,4 @@
-﻿using Fidget.Commander.Dispatch;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using StructureMap;
@@ -38,6 +37,7 @@ namespace Fidget.Commander.Samples.StructureMap
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddFidgetCommander();
         }
 
         /// <summary>
@@ -49,14 +49,10 @@ namespace Fidget.Commander.Samples.StructureMap
         {
             registry.Scan( scanner =>
             {
-                scanner.TheCallingAssembly();
+                scanner.AssemblyContainingType<Startup>();
                 scanner.ConnectImplementationsToTypesClosing( typeof( ICommandHandler<,> ) );
                 scanner.ConnectImplementationsToTypesClosing( typeof( ICommandDecorator<,> ) );
             });
-            
-            registry.For( typeof(ICommandAdapter<,>) ).Use( typeof(CommandAdapter<,>) );
-            registry.For<ICommandAdapterFactory>().Use<CommandAdapterFactory>();
-            registry.For<ICommandDispatcher>().Use<CommandDispatcher>();
         }
 
         /// <summary>

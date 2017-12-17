@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <VersionPrefix>2.1.0</VersionPrefix>
+        <VersionPrefix>3.0.0</VersionPrefix>
         <PackageId>Fidget.Commander</PackageId>
         <Authors>Sean Terry</Authors>
         <Description>Basic command dispatcher</Description>
@@ -11,24 +11,12 @@
         <Copyright>Copyright 2017 Sean Terry</Copyright>
         <PackageLicenseUrl>https://github.com/seanterry42/Fidget.Commander/blob/master/LICENSE</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/seanterry42/Fidget.Commander</PackageProjectUrl>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <DocumentationFile>bin\Debug\netstandard2.0\Fidget.Commander.xml</DocumentationFile>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-      <DocumentationFile>bin\Release\netstandard2.0\Fidget.Commander.xml</DocumentationFile>
+        <RootNamespace>Fidget.Commander</RootNamespace>
+        <NoWarn>1701;1702;1705;1998</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.ComponentModel" Version="4.3.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-        <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.dependencyinjection.abstractions\2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-      </Reference>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,75 @@
+﻿/*  Copyright 2017 Sean Terry
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License. 
+*/
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Xunit;
+
+namespace Fidget.Commander
+{
+    public class CommandHandler_TCommand_TResult_Tests
+    {
+        class TestCommand : ICommand<object> {}
+        class Handler : CommandHandler<TestCommand,object>
+        {
+            public Func<TestCommand,object> callback;
+            protected override Task<object> Execute( TestCommand command, CancellationToken cancellationToken ) =>
+                Task.FromResult( callback.Invoke( command ) );
+        }
+
+        Func<TestCommand,object> callback;
+        ICommandHandler<TestCommand,object> instance => new Handler { callback = callback };
+
+        public class Handle : CommandHandler_TCommand_TResult_Tests
+        {
+            TestCommand command = new TestCommand();
+            CancellationToken cancellationToken = CancellationToken.None;
+
+            async Task<object> invoke() => await instance.Handle( command, cancellationToken );
+            
+            [Fact]
+            public async Task requires_command()
+            {
+                command = null;
+                await Assert.ThrowsAsync<ArgumentNullException>( nameof(command), invoke );
+            }
+
+            [Fact]
+            public async Task cancels_when_requested()
+            {
+                cancellationToken = new CancellationToken( true );
+                await Assert.ThrowsAsync<OperationCanceledException>( invoke );
+            }
+
+            [Fact]
+            public async Task returns_override_result()
+            {
+                var expected = new object();
+                var executions = 0;
+                callback = cmd =>
+                {
+                    Assert.Equal( command, cmd );
+                    executions++;
+                    return expected;
+                };
+
+                var actual = await invoke();
+                Assert.Equal( 1, executions );
+                Assert.Equal( expected, actual );
+            }
+        }
+    }
+}

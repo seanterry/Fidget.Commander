@@ -19,19 +19,13 @@ using System.Threading.Tasks;
 namespace Fidget.Commander
 {
     /// <summary>
-    /// Defines a dispatcher for resolving and executing the handlers for commands.
+    /// Defines a delegate type that represents command execution.
     /// </summary>
+    /// <typeparam name="TCommand">Type of the executing command.</typeparam>
+    /// <typeparam name="TResult">Type of the command result.</typeparam>
+    /// <param name="command">Command being executed.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The command result.</returns>
 
-    public interface ICommandDispatcher
-    {
-        /// <summary>
-        /// Locates and executes the handler for the given command.
-        /// </summary>
-        /// <typeparam name="TResult">Type of the command result.</typeparam>
-        /// <param name="command">Command whose handler to execute.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>The command result.</returns>
-
-        Task<TResult> Execute<TResult>( ICommand<TResult> command, CancellationToken cancellationToken = default(CancellationToken) );
-    }
+    public delegate Task<TResult> CommandDelegate<TCommand,TResult>( TCommand command, CancellationToken cancellationToken ) where TCommand : ICommand<TResult>;
 }

@@ -13,25 +13,20 @@
     limitations under the License. 
 */
 
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace Fidget.Commander
+namespace Fidget.Commander.Internal
 {
     /// <summary>
-    /// Defines a dispatcher for resolving and executing the handlers for commands.
+    /// Defines a factory for generating command adapters.
     /// </summary>
 
-    public interface ICommandDispatcher
+    public interface ICommandAdapterFactory
     {
         /// <summary>
-        /// Locates and executes the handler for the given command.
+        /// Returns the appropriate adapter for the given command.
         /// </summary>
         /// <typeparam name="TResult">Type of the command result.</typeparam>
-        /// <param name="command">Command whose handler to execute.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>The command result.</returns>
+        /// <param name="command">Command whose adapter to return.</param>
 
-        Task<TResult> Execute<TResult>( ICommand<TResult> command, CancellationToken cancellationToken = default(CancellationToken) );
+        ICommandAdapter<TResult> CreateFor<TResult>( ICommand<TResult> command );
     }
 }

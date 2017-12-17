@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*  Copyright 2017 Sean Terry
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License. 
+*/
+
+using System;
 using Xunit;
 
 namespace Fidget.Commander
@@ -6,19 +21,19 @@ namespace Fidget.Commander
     /// <summary>
     /// Tests of the unit structure.
     /// </summary>
-    
-    public class UnitStructureTesting
+
+    public class UnitStructureTests
     {
         /// <summary>
         /// Tests of the non-generic CompareTo methods.
         /// </summary>
-        
+
         public class CompareTo_NonGeneric
         {
             /// <summary>
             /// Instance under test.
             /// </summary>
-            
+
             IComparable Instance = new Unit();
 
             [Fact]
@@ -27,7 +42,7 @@ namespace Fidget.Commander
                 var actual = Instance.CompareTo( Instance );
                 Assert.Equal( 0, actual );
             }
-            
+
             [Fact]
             public void ReturnsZero_WhenComparedToDefault()
             {
@@ -39,7 +54,7 @@ namespace Fidget.Commander
         /// <summary>
         /// Tests of the generic CompareTo method.
         /// </summary>
-        
+
         public class CompareTo_Generic
         {
             /// <summary>
@@ -66,7 +81,7 @@ namespace Fidget.Commander
         /// <summary>
         /// Tests of the non-generic Equals method.
         /// </summary>
-        
+
         public class Equals_NonGeneric
         {
             /// <summary>
@@ -74,7 +89,7 @@ namespace Fidget.Commander
             /// </summary>
 
             object Instance = new Unit();
-            
+
             [Fact]
             public void ReturnsTrue_WhenComparedToSelf()
             {
@@ -100,13 +115,13 @@ namespace Fidget.Commander
         /// <summary>
         /// Tests of the generic Equals operator.
         /// </summary>
-        
+
         public class Equals_Generic
         {
             /// <summary>
             /// Instance under test.
             /// </summary>
-            
+
             IEquatable<Unit> Instance = new Unit();
 
             [Fact]
@@ -143,13 +158,13 @@ namespace Fidget.Commander
         /// <summary>
         /// Tests of the equality operator.
         /// </summary>
-        
+
         public class EqualityOperator
         {
             /// <summary>
             /// Instance under test.
             /// </summary>
-            
+
             Unit Instance = new Unit();
 
             [Fact]
@@ -174,7 +189,7 @@ namespace Fidget.Commander
         /// <summary>
         /// Tests of the inequality operator.
         /// </summary>
-        
+
         public class InequalityOperator
         {
             /// <summary>
