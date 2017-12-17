@@ -44,24 +44,6 @@ namespace Fidget.Commander.Internal
         /// <summary>
         /// Locates and executes the handler for the given command.
         /// </summary>
-        /// <param name="command">Command whose handler to execute.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-                
-        public async Task Execute( ICommand command, CancellationToken cancellationToken )
-        {
-            if ( command == null ) throw new ArgumentNullException( nameof( command ) );
-
-            cancellationToken.ThrowIfCancellationRequested();
-
-            var adapter = factory.CreateFor( command ) ??
-                throw new InvalidOperationException( $"No adapter returned for the command {command.GetType()}" );
-
-            await adapter.Execute( command, cancellationToken );
-        }
-
-        /// <summary>
-        /// Locates and executes the handler for the given command.
-        /// </summary>
         /// <typeparam name="TResult">Type of the command result.</typeparam>
         /// <param name="command">Command whose handler to execute.</param>
         /// <param name="cancellationToken">Cancellation token.</param>

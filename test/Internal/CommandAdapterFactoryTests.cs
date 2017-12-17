@@ -38,33 +38,6 @@ namespace Fidget.Commander.Internal
             }
         }
 
-        public class CreateFor : CommandAdapterFactoryTests
-        {
-            public class TestCommand : ICommand {}
-
-            ICommand command = new TestCommand();
-            ICommandAdapter invoke() => instance.CreateFor( command );
-
-            [Fact]
-            public void requires_command()
-            {
-                command = null;
-                Assert.Throws<ArgumentNullException>( nameof(command), ()=>invoke() );
-            }
-
-            [Fact]
-            public void returns_adapter()
-            {
-                var handler = new Mock<ICommandHandler<TestCommand>>().Object;
-                var decorators = new List<ICommandDecorator<TestCommand>>();
-                var expected = new CommandAdapter<TestCommand>( handler, decorators );
-                mockResolver.Setup( _=> _.GetService( typeof(CommandAdapter<TestCommand>) ) ).Returns( expected );
-
-                var actual = invoke();
-                Assert.Equal( expected, actual );
-            }
-        }
-
         public class CreateFor_TResult : CommandAdapterFactoryTests
         {
             public class TestCommand : ICommand<object> { }

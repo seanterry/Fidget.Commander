@@ -13,26 +13,12 @@
     limitations under the License. 
 */
 
-using System.Threading;
-using System.Threading.Tasks;
-
 namespace Fidget.Commander
 {
     /// <summary>
     /// Defines a decorator for modifying the behavior of a command handler.
     /// </summary>
     /// <typeparam name="TCommand">Type of the command whose handler to decorate.</typeparam>
-    
-    public interface ICommandDecorator<TCommand> where TCommand : ICommand
-    {
-        /// <summary>
-        /// Executes the decorator.
-        /// </summary>
-        /// <param name="command">Command to execute.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <param name="continuation">Delegate that represents the next stage of command execution.</param>
-        /// <returns>The command result.</returns>
 
-        Task Execute( TCommand command, CancellationToken cancellationToken, CommandDelegate<TCommand> continuation );
-    }
+    public interface ICommandDecorator<TCommand> : ICommandDecorator<TCommand,Unit> where TCommand : ICommand {}
 }

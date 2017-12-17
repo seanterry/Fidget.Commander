@@ -24,13 +24,6 @@ namespace Fidget.Commander.Internal
         /// <summary>
         /// Returns the appropriate adapter for the given command.
         /// </summary>
-        /// <param name="command">Command whose adapter to return.</param>
-
-        ICommandAdapter CreateFor( ICommand command );
-
-        /// <summary>
-        /// Returns the appropriate adapter for the given command.
-        /// </summary>
         /// <typeparam name="TResult">Type of the command result.</typeparam>
         /// <param name="command">Command whose adapter to return.</param>
 

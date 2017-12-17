@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <VersionPrefix>3.0.0-beta1</VersionPrefix>
+        <VersionPrefix>3.0.0</VersionPrefix>
         <PackageId>Fidget.Commander</PackageId>
         <Authors>Sean Terry</Authors>
         <Description>Basic command dispatcher</Description>
@@ -16,9 +16,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-        <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.dependencyinjection.abstractions\2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-      </Reference>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
     </ItemGroup>
 
 </Project>

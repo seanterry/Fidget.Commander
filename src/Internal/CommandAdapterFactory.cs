@@ -49,23 +49,6 @@ namespace Fidget.Commander.Internal
         /// <typeparam name="TResult">Type of the command result.</typeparam>
         /// <param name="command">Command whose adapter to return.</param>
 
-        public ICommandAdapter CreateFor( ICommand command )
-        {
-            if ( command == null ) throw new ArgumentNullException( nameof( command ) );
-
-            var commandType = command.GetType();
-            var adapterType = typeof( CommandAdapter<> ).MakeGenericType( commandType );
-
-            return (ICommandAdapter)resolver
-                .GetService( adapterType ) ?? throw new InvalidOperationException( $"Unable to create an adapter for {adapterType}" );
-        }
-
-        /// <summary>
-        /// Returns the appropriate adapter for the given command.
-        /// </summary>
-        /// <typeparam name="TResult">Type of the command result.</typeparam>
-        /// <param name="command">Command whose adapter to return.</param>
-
         public ICommandAdapter<TResult> CreateFor<TResult>( ICommand<TResult> command )
         {
             if ( command == null ) throw new ArgumentNullException( nameof( command ) );

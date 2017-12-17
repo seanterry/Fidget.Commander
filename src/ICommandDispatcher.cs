@@ -27,14 +27,6 @@ namespace Fidget.Commander
         /// <summary>
         /// Locates and executes the handler for the given command.
         /// </summary>
-        /// <param name="command">Command whose handler to execute.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-
-        Task Execute( ICommand command, CancellationToken cancellationToken );
-
-        /// <summary>
-        /// Locates and executes the handler for the given command.
-        /// </summary>
         /// <typeparam name="TResult">Type of the command result.</typeparam>
         /// <param name="command">Command whose handler to execute.</param>
         /// <param name="cancellationToken">Cancellation token.</param>

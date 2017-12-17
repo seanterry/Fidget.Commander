@@ -52,8 +52,6 @@ namespace Fidget.Commander.Samples.StructureMap
                 scanner.AssemblyContainingType<Startup>();
                 scanner.ConnectImplementationsToTypesClosing( typeof( ICommandHandler<,> ) );
                 scanner.ConnectImplementationsToTypesClosing( typeof( ICommandDecorator<,> ) );
-                scanner.ConnectImplementationsToTypesClosing( typeof( ICommandHandler<> ) );
-                scanner.ConnectImplementationsToTypesClosing( typeof( ICommandDecorator<> ) );
             });
         }
 

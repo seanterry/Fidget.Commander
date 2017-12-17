@@ -13,9 +13,6 @@
     limitations under the License. 
 */
 
-using System.Threading;
-using System.Threading.Tasks;
-
 namespace Fidget.Commander
 {
     /// <summary>
@@ -23,14 +20,5 @@ namespace Fidget.Commander
     /// </summary>
     /// <typeparam name="TCommand">Type of the command.</typeparam>
 
-    public interface ICommandHandler<in TCommand> where TCommand : ICommand 
-    {
-        /// <summary>
-        /// Handles execution of the command.
-        /// </summary>
-        /// <param name="command">Command to be executed.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        
-        Task Handle( TCommand command, CancellationToken cancellationToken );
-    }
+    public interface ICommandHandler<in TCommand> : ICommandHandler<TCommand,Unit> where TCommand : ICommand {}
 }

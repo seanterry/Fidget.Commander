@@ -40,7 +40,6 @@ namespace Microsoft.Extensions.DependencyInjection
             if ( services == null ) throw new ArgumentNullException( nameof( services ) );
 
             services.AddTransient( typeof(CommandAdapter<,>), typeof(CommandAdapter<,>) );
-            services.AddTransient( typeof(CommandAdapter<>), typeof(CommandAdapter<>) );
             services.AddTransient<ICommandAdapterFactory,CommandAdapterFactory>();
             services.AddTransient<ICommandDispatcher,CommandDispatcher>();
 

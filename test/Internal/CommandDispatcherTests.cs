@@ -64,7 +64,7 @@ namespace Fidget.Commander.Internal
             [Fact]
             public async Task executes_adapter()
             {
-                var mockAdapter = new Mock<ICommandAdapter>();
+                var mockAdapter = new Mock<ICommandAdapter<Unit>>();
                 mockFactory.Setup( _=> _.CreateFor( command ) ).Returns( mockAdapter.Object );
 
                 await invoke();

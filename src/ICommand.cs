@@ -20,5 +20,5 @@ namespace Fidget.Commander
     /// </summary>
     /// <remarks>This is a marker interface.</remarks>
     
-    public interface ICommand {}
+    public interface ICommand : ICommand<Unit> {}
 }

@@ -42,7 +42,7 @@ namespace Fidget.Commander
 
         public class TestVoidHandler : ICommandHandler<TestVoidCommand>
         {
-            public Task Handle( TestVoidCommand command, CancellationToken cancellationToken ) => Task.CompletedTask;
+            public Task<Unit> Handle( TestVoidCommand command, CancellationToken cancellationToken ) => Task.FromResult( Unit.Default );
         }
 
         public class TestResultCommand : ICommand<object> {}
@@ -72,32 +72,9 @@ namespace Fidget.Commander
 
             Assert.IsType<CommandAdapterFactory>( actual );
         }
-
+        
         [Fact]
-        public void registers_void_adapter()
-        {
-            // add handlers from assembly
-            var services = invoke().Scan( scanner => scanner.FromAssemblyOf<TestVoidCommand>()
-                .AddClasses( _ => _.AssignableTo( typeof( ICommandHandler<> ) ) )
-                    .AsImplementedInterfaces()
-                    .WithTransientLifetime()
-                .AddClasses( _ => _.AssignableTo( typeof( ICommandDecorator<> ) ) )
-                    .AsImplementedInterfaces()
-                    .WithTransientLifetime()
-            );
-
-            var factory = services
-                .BuildServiceProvider()
-                .GetRequiredService<ICommandAdapterFactory>();
-
-            var command = new TestVoidCommand();
-            var actual = factory.CreateFor( command );
-
-            Assert.IsType<CommandAdapter<TestVoidCommand>>( actual );
-        }
-
-        [Fact]
-        public void registers_result_adapter()
+        public void registers_adapter()
         {
             // add handlers from assembly
             var services = invoke().Scan( scanner => scanner.FromAssemblyOf<TestResultCommand>()
